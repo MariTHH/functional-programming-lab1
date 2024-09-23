@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Me6N6Y0S+q4=",
+  "success": true,
+  "projectFilePath": "D:\\Учеба\\5 sem\\FProj\\FProj.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tolst\\.nuget\\packages\\fsharp.core\\8.0.400\\fsharp.core.8.0.400.nupkg.sha512"
+  ],
+  "logs": []
+}
