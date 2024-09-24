@@ -13,6 +13,7 @@ let findPrimeRecursively count =
         else findPrimeInner count (n + 1)
     findPrimeInner count 2
 
+
 // 2. Хвостовая рекурсия
 let findPrimeTailRecursive count =
     let rec findPrimeInner foundPrimes currNum =
