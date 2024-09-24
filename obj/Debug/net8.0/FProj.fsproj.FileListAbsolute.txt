@@ -27,3 +27,4 @@ D:\Учеба\5 sem\FProj\obj\Debug\net8.0\refint\FProj.dll
 D:\Учеба\5 sem\FProj\obj\Debug\net8.0\FProj.pdb
 D:\Учеба\5 sem\FProj\obj\Debug\net8.0\FProj.genruntimeconfig.cache
 D:\Учеба\5 sem\FProj\obj\Debug\net8.0\ref\FProj.dll
+D:\Учеба\5 sem\FProj\obj\Debug\net8.0\FProj.sourcelink.json

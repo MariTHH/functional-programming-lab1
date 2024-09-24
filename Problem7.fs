@@ -14,12 +14,15 @@ let findPrimeRecursively count =
     findPrimeInner count 2
 
 // 2. Хвостовая рекурсия
+
 let findPrimeTailRecursive count =
-    let rec findPrimeInner count n =
-        if count = 0 then n - 1
-        else if isPrime n then findPrimeInner (count - 1) (n + 1)
-        else findPrimeInner count (n + 1)
-    findPrimeInner count 2
+    let rec findPrimeInner foundPrimes currNum =
+        if foundPrimes = count then currNum - 1
+        else if isPrime currNum then findPrimeInner (foundPrimes + 1) (currNum + 1)
+        else findPrimeInner foundPrimes (currNum + 1)
+    
+    // Начинаем поиск с 2 (первое простое число) и с нуля найденных простых чисел
+    findPrimeInner 0 2
 
 // 3. Модульное решение
 let findPrimeModular count =
