@@ -14,7 +14,6 @@ let findPrimeRecursively count =
     findPrimeInner count 2
 
 // 2. Хвостовая рекурсия
-
 let findPrimeTailRecursive count =
     let rec findPrimeInner foundPrimes currNum =
         if foundPrimes = count then currNum - 1
