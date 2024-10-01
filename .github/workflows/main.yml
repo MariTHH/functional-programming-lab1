@@ -36,13 +36,13 @@ jobs:
 
     - name: Linter
       run: |
-          dotnet fsharplint lint FsSolution/Program.fs
+          dotnet fsharplint lint Program.fs
   
     - name: Format 
       run: |
-        fantomas FsSolution/Problem7.fs
-        fantomas FsSolution/Problem26.fs
-        fantomas FsSolution/Program.fs
+        fantomas Problem7.fs
+        fantomas Problem26.fs
+        fantomas Program.fs
 
     - name: Run tests
       run: dotnet test Tests/Tests.fsproj --verbosity normal
