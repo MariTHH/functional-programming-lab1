@@ -30,14 +30,17 @@ jobs:
     - name: Create Tool Manifest
       run: dotnet new tool-manifest
 
+    - name: Clear NuGet Cache
+      run: dotnet nuget locals all --clear
+
     - name: Install FSharpLint
-      run: dotnet tool install FSharpLint
+      run: dotnet tool install FSharpLint --local
 
     - name: Run FSharpLint
       run: dotnet fsharplint --check FsSolution/FProj/**/*.fs
 
     - name: Install Fantomas
-      run: dotnet tool install Fantomas
+      run: dotnet tool install Fantomas --local
 
     - name: Run Fantomas
       run: dotnet fantomas FsSolution/FProj/**/*.fs
