@@ -27,6 +27,9 @@ jobs:
     - name: Build the project
       run: dotnet build FsSolution/FProj.fsproj --configuration Debug
 
+    - name: Create Tool Manifest
+      run: dotnet new tool-manifest
+
     - name: Install FSharpLint
       run: dotnet tool install FSharpLint
 
