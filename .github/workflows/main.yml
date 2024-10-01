@@ -36,7 +36,7 @@ jobs:
   
     - name: Format 
       run: |
-        fantomas Problem7.fs
+        fantomas FProj/FsSolution/Problem7.fs
         fantomas Problem26.fs
         fantomas Program.fs
 
