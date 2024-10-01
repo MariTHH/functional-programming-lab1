@@ -1,45 +1,54 @@
 ﻿module Problem7
 
-// 1. Простая рекурсия
+// 1. Простая рекурсия с использованием pattern matching и guards
 let isPrime n =
     let rec check i =
-        i * i > n || (n % i <> 0 && check (i + 1))
+        match i with
+        | _ when i * i > n -> true
+        | _ when n % i = 0 -> false
+        | _ -> check (i + 1)
+
     check 2
 
 let findPrimeRecursively count =
     let rec findPrimeInner count n =
-        if count = 0 then n - 1
-        else if isPrime n then findPrimeInner (count - 1) (n + 1)
-        else findPrimeInner count (n + 1)
+        match count with
+        | 0 -> n - 1
+        | _ when isPrime n -> findPrimeInner (count - 1) (n + 1)
+        | _ -> findPrimeInner count (n + 1)
+
     findPrimeInner count 2
 
-
-// 2. Хвостовая рекурсия
+// 2. Хвостовая рекурсия с использованием pattern matching и guards
 let findPrimeTailRecursive count =
     let rec findPrimeInner foundPrimes currNum =
-        if foundPrimes = count then currNum - 1
-        else if isPrime currNum then findPrimeInner (foundPrimes + 1) (currNum + 1)
-        else findPrimeInner foundPrimes (currNum + 1)
-    
-    // Начинаем поиск с 2 (первое простое число) и с нуля найденных простых чисел
+        match foundPrimes with
+        | _ when foundPrimes = count -> currNum - 1
+        | _ when isPrime currNum -> findPrimeInner (foundPrimes + 1) (currNum + 1)
+        | _ -> findPrimeInner foundPrimes (currNum + 1)
+
     findPrimeInner 0 2
 
-// 3. Модульное решение
+// 3. Модульное решение с использованием guards
 let findPrimeModular count =
-    Seq.initInfinite ((+) 2)
-    |> Seq.filter isPrime
-    |> Seq.item (count - 1)
+    Seq.initInfinite ((+) 2) |> Seq.filter isPrime |> Seq.item (count - 1)
 
-// 4. С использованием `map`
+// 4. С использованием `map` и pattern matching
 let findPrimeWithMap count =
     Seq.initInfinite ((+) 2)
-    |> Seq.map (fun n -> if isPrime n then Some n else None)
+    |> Seq.map (fun n ->
+        match isPrime n with
+        | true -> Some n
+        | false -> None)
     |> Seq.choose id
     |> Seq.item (count - 1)
 
-// 5. Ленивая коллекция (бесконечный список)
+// 5. Ленивая коллекция (бесконечный список) с использованием guards
 let findPrimeLazy count =
     Seq.initInfinite ((+) 2)
-    |> Seq.filter isPrime
+    |> Seq.filter (fun n ->
+        match isPrime n with
+        | true -> true
+        | false -> false)
     |> Seq.cache
     |> Seq.item (count - 1)

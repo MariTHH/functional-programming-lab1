@@ -9,6 +9,7 @@ let main argv =
     printfn "2 - Длина периода десятичной дроби"
 
     let choice = Console.ReadLine()
+
     match choice with
     | "1" ->
         printfn "10001-е простое число (рекурсия): %d" (findPrimeRecursively 10001)
