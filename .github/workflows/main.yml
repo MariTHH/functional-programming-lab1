@@ -10,6 +10,7 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -19,16 +20,13 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '7.0.x'
-
-    - name: Create Tool Manifest
-      run: dotnet new tool-manifest
+        dotnet-version: '6.0.x'
 
     - name: Install FSharpLint
-      run: dotnet tool install FSharpLint
+      run: dotnet tool install -g dotnet-fsharplint
 
-    - name: Install Fantomas
-      run: dotnet tool install Fantomas
+    - name: Install FSharpLint
+      run: dotnet tool install -g fantomas
 
     - name: Restore dependencies
       run: dotnet restore FsSolution/FProj.fsproj
@@ -44,9 +42,9 @@ jobs:
   
     - name: Format 
       run: |
-        dotnet fantomas FsSolution/Problem7.fs
-        dotnet fantomas FsSolution/Problem26.fs
-        dotnet fantomas FsSolution/Program.fs
+        fantomas FsSolution/Problem7.fs
+        fantomas FsSolution/Problem26.fs
+        fantomas FsSolution/Program.fs
 
     - name: Run tests
       run: dotnet test Tests/Tests.fsproj --verbosity normal
