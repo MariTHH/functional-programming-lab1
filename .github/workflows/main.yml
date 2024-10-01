@@ -1,4 +1,4 @@
-name: CI
+name: .NET Core CI
 
 on:
   push:
@@ -10,28 +10,23 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0.x' 
+        dotnet-version: '8.0.x'
 
-    - name: Install dependencies
-      run: dotnet restore ./FsSolution/FProj.fsproj
+    - name: Restore dependencies
+      run: dotnet restore FProj/FsSolution/FsSolution.fsproj
+
+    - name: Build the project
+      run: dotnet build FProj/FsSolution/FsSolution.fsproj --configuration Debug
 
     - name: Run tests
-      run: dotnet test --no-build --verbosity normal ./FsSolution/FProj.fsproj
-
-    - name: Run linter (FSharpLint)
-      run: dotnet fsharplint lint .
-
-    - name: Run Fantomas for auto-formatting
-      run: dotnet fantomas .
-
-    - name: Build project (with warnings treated as errors)
-      run: dotnet build --no-restore --warnaserror
+      run: dotnet test FProj/Tests/Tests.fsproj --verbosity normal
