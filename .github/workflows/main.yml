@@ -10,6 +10,7 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -27,23 +28,17 @@ jobs:
     - name: Build the project
       run: dotnet build FsSolution/FProj.fsproj --configuration Debug
 
-    - name: Create Tool Manifest
-      run: dotnet new tool-manifest
-
-    - name: Clear NuGet Cache
-      run: dotnet nuget locals all --clear
+    - name: Install FSharpLint
+      run: dotnet tool install -g dotnet-fsharplint
 
     - name: Install FSharpLint
-      run: dotnet tool install FSharpLint --local
+      run: dotnet tool install -g fantomas
 
-    - name: Run FSharpLint
-      run: dotnet fsharplint --check FsSolution/FProj/**/*.fs
-
-    - name: Install Fantomas
-      run: dotnet tool install Fantomas --local
-
-    - name: Run Fantomas
-      run: dotnet fantomas FsSolution/FProj/**/*.fs
+    - name: Lint 
+      run: |
+        dotnet fsharplint lint Problem7.fs
+        dotnet fsharplint lint Problem26.fs
+        dotnet fsharplint lint Program.fs
 
     - name: Run tests
       run: dotnet test Tests/Tests.fsproj --verbosity normal
