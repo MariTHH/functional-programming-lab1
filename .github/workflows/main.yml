@@ -10,7 +10,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -28,10 +27,17 @@ jobs:
     - name: Build the project
       run: dotnet build FsSolution/FProj.fsproj --configuration Debug
 
+    - name: Install FSharpLint
+      run: dotnet tool install FSharpLint
+
     - name: Run FSharpLint
-      run: dotnet tool install --global FSharpLint && fsharplint --check FsSolution/*.fs
+      run: dotnet fsharplint --check FsSolution/FProj/**/*.fs
+
+    - name: Install Fantomas
+      run: dotnet tool install Fantomas
 
     - name: Run Fantomas
-      run: dotnet tool install --global Fantomas && fantomas FsSolution/*.fs
+      run: dotnet fantomas FsSolution/FProj/**/*.fs
+
     - name: Run tests
       run: dotnet test Tests/Tests.fsproj --verbosity normal
