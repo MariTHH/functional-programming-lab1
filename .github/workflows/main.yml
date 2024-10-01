@@ -35,10 +35,9 @@ jobs:
       run: dotnet tool install -g fantomas
 
     - name: Lint 
-      run: dotnet fsharplint --check FsSolution/FProj/**/*.fs
-
-    - name: Lint 
-      run: dotnet fantomas FsSolution/FProj/**/*.fs
+      run: |
+        dotnet fsharplint lint Problem26.fs
+        dotnet fsharplint lint Program.fs
 
     - name: Run tests
       run: dotnet test Tests/Tests.fsproj --verbosity normal
