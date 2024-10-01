@@ -28,5 +28,11 @@ jobs:
     - name: Build the project
       run: dotnet build FsSolution/FProj.fsproj --configuration Debug
 
+    - name: Run FSharpLint
+      run: dotnet tool install --global FSharpLint && fsharplint --check FsSolution/FProj
+
+    - name: Run Fantomas
+      run: dotnet tool install --global Fantomas && fantomas FsSolution/FProj/**/*.fs
+
     - name: Run tests
       run: dotnet test Tests/Tests.fsproj --verbosity normal
