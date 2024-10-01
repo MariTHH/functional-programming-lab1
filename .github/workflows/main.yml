@@ -36,6 +36,7 @@ jobs:
 
     - name: Linter
       run: |
+          cd ../FsSolution
           dotnet fsharplint lint Program.fs
   
     - name: Format 
