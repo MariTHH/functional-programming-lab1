@@ -23,10 +23,10 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore FsSolution/FsSolution.fsproj
+      run: dotnet restore FsSolution/FProg.fsproj
 
     - name: Build the project
-      run: dotnet build FsSolution/FsSolution.fsproj --configuration Debug
+      run: dotnet build FsSolution/FProg.fsproj --configuration Debug
 
     - name: Run tests
       run: dotnet test Tests/Tests.fsproj --verbosity normal
