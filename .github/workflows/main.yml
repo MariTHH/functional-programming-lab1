@@ -1,10 +1,12 @@
-name: .NET
+name: .NET 
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
@@ -12,26 +14,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
-    - name: Setup linter  
-      run: dotnet tool install -g dotnet-fsharplint
-    - name: Setup formatter
-      run: dotnet tool install -g fantomas
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Lint 
-      run: |
-        dotnet fsharplint lint Problem7.fs
-        dotnet fsharplint lint Program.fs
+        dotnet-version: '6.0.x'
 
+    - name: Install FSharpLint
+      run: dotnet tool install -g dotnet-fsharplint
+
+    - name: Install FSharpLint
+      run: dotnet tool install -g fantomas
+
+    - name: Restore dependencies
+      run: dotnet restore FsSolution/FProj.fsproj
+
+    - name: Build the project
+      run: dotnet build FsSolution/FProj.fsproj --configuration Debug
+  
     - name: Format 
       run: |
-        fantomas Problem7.fs
+        fantomas ../FsSolution/Problem7.fs
         fantomas Problem26.fs
         fantomas Program.fs
+
+    - name: Run tests
+      run: dotnet test Tests/Tests.fsproj --verbosity normal
