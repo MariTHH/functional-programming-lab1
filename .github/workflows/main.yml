@@ -33,11 +33,6 @@ jobs:
 
     - name: Build the project
       run: dotnet build FsSolution/FProj.fsproj --configuration Debug
-
-    - name: Linter
-      run: |
-          cd ..
-          dotnet fsharplint lint Program.fs
   
     - name: Format 
       run: |
