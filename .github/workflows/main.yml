@@ -22,23 +22,29 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
-    - name: Restore dependencies
-      run: dotnet restore FsSolution/FProj.fsproj
-
-    - name: Build the project
-      run: dotnet build FsSolution/FProj.fsproj --configuration Debug
-
     - name: Install FSharpLint
       run: dotnet tool install -g dotnet-fsharplint
 
     - name: Install FSharpLint
       run: dotnet tool install -g fantomas
 
-    - name: Lint 
+    - name: Restore dependencies
+      run: dotnet restore FsSolution/FProj.fsproj
+
+    - name: Build the project
+      run: dotnet build FsSolution/FProj.fsproj --configuration Debug
+
+    - name: Linter
       run: |
-        dotnet fsharplint lint FsSolution/Problem7.fs
-        dotnet fsharplint lint FsSolution/Problem26.fs
-        dotnet fsharplint lint FsSolution/Program.fs
+          dotnet fsharplint lint FsSolution/Problem7.fs
+          dotnet fsharplint lint FsSolution/Problem26.fs
+          dotnet fsharplint lint FsSolution/Program.fs
+  
+    - name: Format 
+      run: |
+        fantomas FsSolution/Problem7.fs
+        fantomas FsSolution/Problem26.fs
+        fantomas FsSolution/Program.fs
 
     - name: Run tests
       run: dotnet test Tests/Tests.fsproj --verbosity normal
