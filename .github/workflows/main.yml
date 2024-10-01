@@ -29,14 +29,14 @@ jobs:
       run: dotnet tool install -g fantomas
 
     - name: Restore dependencies
-      run: dotnet restore FsSolution/FProj.fsproj
+      run: dotnet restore 
 
     - name: Build the project
-      run: dotnet build FsSolution/FProj.fsproj --configuration Debug
+      run: dotnet build 
   
     - name: Format 
       run: |
-        fantomas ../FsSolution/Problem7.fs
+        fantomas Problem7.fs
         fantomas Problem26.fs
         fantomas Program.fs
 
