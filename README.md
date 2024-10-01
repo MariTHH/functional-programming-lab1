@@ -35,14 +35,20 @@
 ```fsharp
 let isPrime n =
     let rec check i =
-        i * i > n || (n % i <> 0 && check (i + 1))
+        match i with
+        | _ when i * i > n -> true
+        | _ when n % i = 0 -> false
+        | _ -> check (i + 1)
+
     check 2
 
 let findPrimeRecursively count =
     let rec findPrimeInner count n =
-        if count = 0 then n - 1
-        else if isPrime n then findPrimeInner (count - 1) (n + 1)
-        else findPrimeInner count (n + 1)
+        match count with
+        | 0 -> n - 1
+        | _ when isPrime n -> findPrimeInner (count - 1) (n + 1)
+        | _ -> findPrimeInner count (n + 1)
+
     findPrimeInner count 2
 
 ```
@@ -67,11 +73,13 @@ let findPrimeRecursively count =
 
 ```fsharp
 let findPrimeTailRecursive count =
-    let rec findPrimeInner count n accumulator =
-        if count = 0 then accumulator
-        else if isPrime n then findPrimeInner (count - 1) (n + 1) n
-        else findPrimeInner count (n + 1) accumulator
-    findPrimeInner count 2 0
+    let rec findPrimeInner foundPrimes currNum =
+        match foundPrimes with
+        | _ when foundPrimes = count -> currNum - 1
+        | _ when isPrime currNum -> findPrimeInner (foundPrimes + 1) (currNum + 1)
+        | _ -> findPrimeInner foundPrimes (currNum + 1)
+
+    findPrimeInner 0 2
 
 ```
 
@@ -96,9 +104,13 @@ let findPrimeModular count =
 #### 4. Использование `map`
 
 ```fsharp
+
 let findPrimeWithMap count =
     Seq.initInfinite ((+) 2)
-    |> Seq.map (fun n -> if isPrime n then Some n else None)
+    |> Seq.map (fun n ->
+        match isPrime n with
+        | true -> Some n
+        | false -> None)
     |> Seq.choose id
     |> Seq.item (count - 1)
     
@@ -113,7 +125,10 @@ let findPrimeWithMap count =
 ```fsharp
 let findPrimeLazy count =
     Seq.initInfinite ((+) 2)
-    |> Seq.filter isPrime
+    |> Seq.filter (fun n ->
+        match isPrime n with
+        | true -> true
+        | false -> false)
     |> Seq.cache
     |> Seq.item (count - 1)
 
@@ -169,15 +184,17 @@ let findMaxCycleRecursively () =
 ```fsharp
 let findMaxCycleTailRecursive () =
     let rec findMax divisor maxDivisor maxLength =
-        if divisor > 1000 then maxDivisor
-        else
+        match divisor with
+        | d when d > 1000 -> maxDivisor
+        | _ ->
             let currentLength = cycleLength divisor
+
             if currentLength > maxLength then
                 findMax (divisor + 1) divisor currentLength
             else
                 findMax (divisor + 1) maxDivisor maxLength
-    findMax 2 0 0
 
+    findMax 2 0 0
 ```
 
 ##### Описание: 

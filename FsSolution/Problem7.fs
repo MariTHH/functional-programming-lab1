@@ -1,6 +1,6 @@
 ﻿module Problem7
 
-// 1. Простая рекурсия с использованием pattern matching и guards
+// 1. Простая рекурсия 
 let isPrime n =
     let rec check i =
         match i with
@@ -19,7 +19,7 @@ let findPrimeRecursively count =
 
     findPrimeInner count 2
 
-// 2. Хвостовая рекурсия с использованием pattern matching и guards
+// 2. Хвостовая рекурсия 
 let findPrimeTailRecursive count =
     let rec findPrimeInner foundPrimes currNum =
         match foundPrimes with
@@ -29,11 +29,11 @@ let findPrimeTailRecursive count =
 
     findPrimeInner 0 2
 
-// 3. Модульное решение с использованием guards
+// 3. Модульное решение
 let findPrimeModular count =
     Seq.initInfinite ((+) 2) |> Seq.filter isPrime |> Seq.item (count - 1)
 
-// 4. С использованием `map` и pattern matching
+// 4. С использованием `map` 
 let findPrimeWithMap count =
     Seq.initInfinite ((+) 2)
     |> Seq.map (fun n ->
@@ -43,7 +43,7 @@ let findPrimeWithMap count =
     |> Seq.choose id
     |> Seq.item (count - 1)
 
-// 5. Ленивая коллекция (бесконечный список) с использованием guards
+// 5. Ленивая коллекция (бесконечный список)
 let findPrimeLazy count =
     Seq.initInfinite ((+) 2)
     |> Seq.filter (fun n ->
