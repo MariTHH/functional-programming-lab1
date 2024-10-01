@@ -10,7 +10,7 @@ open System.Reflection
 [<assembly: System.Reflection.AssemblyCompanyAttribute("FProj")>]
 [<assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")>]
 [<assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")>]
-[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+daea98e2db32d2d2935772efa84262f16f0363b8")>]
+[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+edb079ce36b749f53e86c5fa9f3b6275458d1ed4")>]
 [<assembly: System.Reflection.AssemblyProductAttribute("FProj")>]
 [<assembly: System.Reflection.AssemblyTitleAttribute("FProj")>]
 [<assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")>]
