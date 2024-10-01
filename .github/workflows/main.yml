@@ -36,7 +36,7 @@ jobs:
 
     - name: Lint 
       run: |
-        otnet fsharplint lint FsSolution/Problem7.fs
+        dotnet fsharplint lint FsSolution/Problem7.fs
         dotnet fsharplint lint FsSolution/Problem26.fs
         dotnet fsharplint lint FsSolution/Program.fs
 
