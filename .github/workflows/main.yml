@@ -36,8 +36,9 @@ jobs:
 
     - name: Lint 
       run: |
-        dotnet fsharplint lint Problem26.fs
-        dotnet fsharplint lint Program.fs
+        otnet fsharplint lint FsSolution/Problem7.fs
+        dotnet fsharplint lint FsSolution/Problem26.fs
+        dotnet fsharplint lint FsSolution/Program.fs
 
     - name: Run tests
       run: dotnet test Tests/Tests.fsproj --verbosity normal
