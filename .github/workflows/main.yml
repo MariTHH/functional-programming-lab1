@@ -22,10 +22,10 @@ jobs:
         dotnet-version: '8.0.x' 
 
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore ./FsSolution/FProj.fsproj
 
     - name: Run tests
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal ./FsSolution/FProj.fsproj
 
     - name: Run linter (FSharpLint)
       run: dotnet fsharplint lint .
